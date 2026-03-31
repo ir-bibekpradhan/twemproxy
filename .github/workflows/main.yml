@@ -19,8 +19,8 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            --build-arg REDIS_VER=${{ github.event.inputs.redis_version }} \
-            -t my-app:${{ github.event.inputs.redis_version }} .
+            -t twemproxy:test .
 
-      - name: Build and test in docker
-        run: bash ./test_in_docker.sh ${{ github.event.inputs.redis_version }}
+      - name: Run test
+        run: |
+          docker run --rm twemproxy:test --help
